@@ -9,7 +9,13 @@ program juego {
 	game.width(15)
 	game.ground("background.jpg")
 	
-	game.addVisual(new Zombie(position = game.at(14,4)))
+	
+	
+	game.addVisual(new Zombie(position = game.at(14,2)))
+	
+	
+	
+	
 	
 	//teclado
 	keyboard.a().onPressDo({selector.plantar()})

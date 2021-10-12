@@ -23,7 +23,7 @@ class Zombie{
 	
 	
 	method image(){
-		return "pepita.png"
+		return "zomboide.png"
 	}
 	method moverse(){
 		return game.onTick(velocidad, "Movement"+self.identity(), { self.move(self.position().left(1)) })
@@ -42,8 +42,18 @@ class Zombie{
 object selector{
 	var property position = game.at(0,3)
 	const property image = "crosshair025.png"
+	var espacioOcupado=false
 	
 	method plantar(){
+		espacioOcupado = self.algoPlantado()
 		game.addVisual(new Planta(position = position))
+	}
+	
+	method algoPlantado(){
+		espacioOcupado = game.colliders(self)
+		if (not espacioOcupado.isEmpty()){
+			self.error("Ya esta ocupado este espacio")
+		}
+		return espacioOcupado
 	}
 }
