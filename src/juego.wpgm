@@ -1,8 +1,18 @@
 import wollok.game.*
 import pepita.*
+import plantas.*
 
 program juego {
-	game.title("Juego Base")
-	game.addVisual(pepita)
+	game.title("Plantoides vs Zomboides")
+	game.addVisualCharacter(selector)
+	game.height(5)
+	game.width(15)
+	game.ground("background.jpg")
+	
+	game.addVisual(new Zombie(position = game.at(14,4)))
+	
+	//teclado
+	keyboard.a().onPressDo({selector.plantar()})
+	
 	game.start()
 }
