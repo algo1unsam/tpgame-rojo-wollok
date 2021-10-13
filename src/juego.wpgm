@@ -1,5 +1,4 @@
 import wollok.game.*
-import pepita.*
 import plantas.*
 
 program juego {
@@ -9,16 +8,20 @@ program juego {
 	game.width(15)
 	game.ground("background.jpg")
 	
+	var x=0
 	
-	
-	game.addVisual(new Zombie(position = game.at(14,2)))
+	game.onTick(3500,"uno",{ => uno.agregarZombie()})
 	
 	
 	
 	
 	
 	//teclado
-	keyboard.a().onPressDo({selector.plantar()})
+	keyboard.a().onPressDo{
+		selector.plantar()
+		
+		
+	}
 	
 	game.start()
 }
