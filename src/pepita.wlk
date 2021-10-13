@@ -1,9 +1,11 @@
 import wollok.game.*
+import defensas.*
 
-object pepita {
+object selector {
 
-	method position() = game.center()
+	var property position = game.center()
 
-	method image() = "pepita.png"
+	const property image = "selector.png"
 
 }
+

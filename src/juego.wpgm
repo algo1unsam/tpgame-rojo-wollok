@@ -1,8 +1,15 @@
 import wollok.game.*
 import pepita.*
+import defensas.*
+
 
 program juego {
 	game.title("Juego Base")
-	game.addVisual(pepita)
+	game.height(1)
+	game.width(20)
+	game.addVisualCharacter(selector)
+	
+	keyboard.z().onPressDo({ inicializador.nuevaTorre(selector.position()) })
+	
 	game.start()
 }
