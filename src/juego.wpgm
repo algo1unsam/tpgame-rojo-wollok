@@ -1,5 +1,6 @@
 import wollok.game.*
 import plantas.*
+import zombies.*
 
 program juego {
 	game.title("Plantoides vs Zomboides")
@@ -8,10 +9,8 @@ program juego {
 	game.width(15)
 	game.ground("background.jpg")
 	
-	var x=0
 	
-	game.onTick(3500,"uno",{ => uno.agregarZombie()})
-	
+	game.onTick(10000,"inicializadorZombie",{ => inicializadorZombie.agregarZombie()})
 	
 	
 	
@@ -19,7 +18,6 @@ program juego {
 	//teclado
 	keyboard.a().onPressDo{
 		selector.plantar()
-		
 		
 	}
 	
