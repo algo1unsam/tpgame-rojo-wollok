@@ -3,17 +3,30 @@ import plantas.*
 import zombies.*
 
 program juego {
+	var unDisparo
 	game.title("Plantoides vs Zomboides")
 	game.addVisualCharacter(selector)
 	game.height(5)
 	game.width(15)
 	game.ground("background.jpg")
+	game.addVisual(otroZombi0)
+	game.addVisual(otroZombi1)
+	game.addVisual(otroZombi2)
+	game.addVisual(otroZombi3)
+	game.addVisual(otroZombi4)
 	
+	//Modelo de creacion de zombis random...
+	//game.onTick(10000,"inicializadorZombie",{ => inicializadorZombie.agregarZombie()})
 	
-	game.onTick(10000,"inicializadorZombie",{ => inicializadorZombie.agregarZombie()})
+	//Modelo de zombis fijos por Fila...
 	
+	game.onCollideDo(otroZombi0,{proyectil=>proyectil.hacerDanio(otroZombi0)})
+	game.onCollideDo(otroZombi1,{proyectil=>proyectil.hacerDanio(otroZombi1)})
+	game.onCollideDo(otroZombi2,{proyectil=>proyectil.hacerDanio(otroZombi2)})
+	game.onCollideDo(otroZombi3,{proyectil=>proyectil.hacerDanio(otroZombi3)})
+	game.onCollideDo(otroZombi4,{proyectil=>proyectil.hacerDanio(otroZombi4)})
 	
-	
+	movimientos.movimientosOtroZombi()
 	
 	//teclado
 	keyboard.a().onPressDo{

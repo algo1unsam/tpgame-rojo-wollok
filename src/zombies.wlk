@@ -11,12 +11,42 @@ object inicializadorZombie{
 		
 	}
 }
+class OtroZombi{
+	const velocidad=4000
+	var property vida = 101
+	var property position=0
+	var contadorDeRevivir = 0
+	
+	var property image
+	method vida() { return vida}
+	method golpear() {vida -= 25 } 
+	method avanzarIzquierda(nuevaPosicion) {
+		var y = nuevaPosicion.y()
+		if (nuevaPosicion == game.at(-1, y)) self.position(game.at(16, y)) else self.position(nuevaPosicion)
+	}
+	method revive(){
+		contadorDeRevivir += 1
+		var y = self.position().y()
+		vida = vida + 100*contadorDeRevivir // para que cada vez se haga mas fuerte
+		self.position(game.at(15,y))
+	}
+	
+}
+object movimientos {
 
+	method movimientosOtroZombi() {
+		game.onTick(10000, "avanza", { otroZombi0.avanzarIzquierda(otroZombi0.position().left(1))})
+		game.onTick(6000, "avanza", { otroZombi1.avanzarIzquierda(otroZombi1.position().left(1))})
+		game.onTick(5000, "avanza", { otroZombi2.avanzarIzquierda(otroZombi2.position().left(1))})
+		game.onTick(9000, "avanza", { otroZombi3.avanzarIzquierda(otroZombi3.position().left(1))})
+		game.onTick(7000, "avanza", { otroZombi4.avanzarIzquierda(otroZombi4.position().left(1))})
+	}
+
+}
 class Zombie{
 	const velocidad=4000
-	const vida=100
+	var vida=100
 	var property position=0
-	
 	
 	method image(){
 		return "zomboide.png"
@@ -31,10 +61,16 @@ class Zombie{
 		
 	}
 	method recibirDanio(){
-		
+
 	}
 	method morir(){
 		game.removeTickEvent("Movement"+self.identity())
+	
 	}
 	
 }
+const otroZombi0 = new OtroZombi(position = game.at(15, 0), image = "zomby.png")
+const otroZombi1 = new OtroZombi(position = game.at(15, 1), image = "zomby.png")
+const otroZombi2 = new OtroZombi(position = game.at(15, 2), image = "zomby.png")
+const otroZombi3 = new OtroZombi(position = game.at(15, 3), image = "zomby.png")
+const otroZombi4 = new OtroZombi(position = game.at(15, 4), image = "zomby.png")

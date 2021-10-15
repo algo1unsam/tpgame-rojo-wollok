@@ -1,5 +1,5 @@
 import wollok.game.*
-
+import zombies.*
 
 object selector{
 	var property position = game.at(0,3)
@@ -27,6 +27,7 @@ object selector{
 		game.addVisual(temp)
 		return temp.moverse()
 	}
+	
 }
 
 class Planta {
@@ -47,7 +48,7 @@ class Planta {
 
 
 class Disparo {
-	const property velocidad=200
+	const property velocidad=300
 	var property position=0
 	const property danio=1
 	method image(){
@@ -60,5 +61,11 @@ class Disparo {
 	method move(nuevaPosicion) {
 		self.position(nuevaPosicion)
 	}
-}
-
+	
+	method hacerDanio(unZombie){
+		if (unZombie.vida()>1) { 
+			unZombie.golpear()
+		} else unZombie.revive()
+	}
+	
+	}
