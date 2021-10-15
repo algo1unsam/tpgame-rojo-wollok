@@ -12,7 +12,12 @@ object selector{
 		game.addVisual(temp)
 		return temp.disparar()
 	}
-	
+	method plantarGirasol(){
+		espacioOcupado = self.algoPlantado()
+		const temp = new PlantaGirasol(position=position)
+		game.addVisual(temp)
+		return temp.disparar()
+	}
 	
 	method algoPlantado(){
 		espacioOcupado = game.colliders(self)
@@ -45,7 +50,10 @@ class Planta {
 	method morir(){		
 	}
 }
-
+class PlantaGirasol inherits Planta{ 
+	override method image() {return "girasol.png"}
+	override method disparar() { return 0 }
+}
 
 class Disparo {
 	const property velocidad=300
@@ -69,3 +77,15 @@ class Disparo {
 	}
 	
 	}
+	class Cortadora{
+		const property position=0
+		var image = "cortadora.png"
+		
+		method image() = image
+	}
+	
+	const cortadora0 = new Cortadora (position = game.at(0, 0))
+	const cortadora1 = new Cortadora (position = game.at(0, 1))
+	const cortadora2 = new Cortadora (position = game.at(0, 2))
+	const cortadora3 = new Cortadora (position = game.at(0, 3))
+	const cortadora4 = new Cortadora (position = game.at(0, 4))
