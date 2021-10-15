@@ -22,7 +22,9 @@ class OtroZombi{
 	method golpear() {vida -= 25 } 
 	method avanzarIzquierda(nuevaPosicion) {
 		var y = nuevaPosicion.y()
-		if (nuevaPosicion == game.at(-1, y)) self.position(game.at(16, y)) else self.position(nuevaPosicion)
+		if (nuevaPosicion == game.at(-1, y)) 
+			self.position(game.at(16, y)) 			
+		else self.position(nuevaPosicion)
 	}
 	method revive(){ //en lugar de usar removeVisual cuando mueren, 
 	                 //los vuelvo a poner en el principio de la pantalla.
@@ -31,12 +33,12 @@ class OtroZombi{
 		vida = vida + 100*contadorDeRevivir // para que cada vez se haga mas fuerte
 		self.position(game.at(15,y))
 	}
-	method hacerDanio()
+	
 }
 object movimientos {
 
 	method movimientosOtroZombi() {
-		game.onTick(10000, "avanza", { otroZombi0.avanzarIzquierda(otroZombi0.position().left(1))})
+		game.onTick(6500, "avanza", { otroZombi0.avanzarIzquierda(otroZombi0.position().left(1))})
 		game.onTick(6000, "avanza", { otroZombi1.avanzarIzquierda(otroZombi1.position().left(1))})
 		game.onTick(5000, "avanza", { otroZombi2.avanzarIzquierda(otroZombi2.position().left(1))})
 		game.onTick(9000, "avanza", { otroZombi3.avanzarIzquierda(otroZombi3.position().left(1))})

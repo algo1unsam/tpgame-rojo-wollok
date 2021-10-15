@@ -32,7 +32,7 @@ program juego {
 	game.onCollideDo(otroZombi4,{proyectil=>proyectil.hacerDanio(otroZombi4)})
 	
 	movimientos.movimientosOtroZombi()
-	
+
 	//teclado
 	keyboard.a().onPressDo{
 		selector.plantar()

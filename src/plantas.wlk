@@ -78,12 +78,16 @@ class Disparo {
 	
 	}
 	class Cortadora{
-		const property position=0
-		var image = "cortadora.png"
 		
+		var image = "cortadora.png"
+		var property position=0
 		method image() = image
-	}
-	
+		method hacerDanio(unZombie){ 
+			game.onTick(200, "atropella", { self.move(self.position().right(1)) })
+			unZombie.revive()}
+		method move(nuevaPosicion) {
+		self.position(nuevaPosicion)}
+		}
 	const cortadora0 = new Cortadora (position = game.at(0, 0))
 	const cortadora1 = new Cortadora (position = game.at(0, 1))
 	const cortadora2 = new Cortadora (position = game.at(0, 2))
