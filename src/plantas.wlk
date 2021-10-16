@@ -70,9 +70,10 @@ class Disparo {
 		self.position(nuevaPosicion)
 	}
 	
-	method hacerDanio(unZombie){
+	method hacerDanio(unZombie,proyectil){
 		if (unZombie.vida()>1) { 
 			unZombie.golpear()
+			game.removeVisual(proyectil)
 		} else unZombie.revive()
 	}
 	
@@ -82,7 +83,7 @@ class Disparo {
 		var image = "cortadora.png"
 		var property position=0
 		method image() = image
-		method hacerDanio(unZombie){ 
+		method hacerDanio(unZombie,proyectil){ 
 			game.onTick(200, "atropella", { self.move(self.position().right(1)) })
 			unZombie.revive()}
 		method move(nuevaPosicion) {

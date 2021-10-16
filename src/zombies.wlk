@@ -29,11 +29,11 @@ class OtroZombi{
 	method revive(){ //en lugar de usar removeVisual cuando mueren, 
 	                 //los vuelvo a poner en el principio de la pantalla.
 		contadorDeRevivir += 1
-		var y = self.position().y() //.randomUpTo(4) asi cuando reviven van a otra fila, pero falta revisar
+		var y = self.position().y().randomUpTo(4)// los zombis reviven en una fila random
 		vida = vida + 100*contadorDeRevivir // para que cada vez se haga mas fuerte
 		self.position(game.at(15,y))
 	}
-	
+	method hacerDanio(unZombi,proyectil) = 0
 }
 object movimientos {
 

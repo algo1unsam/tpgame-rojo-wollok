@@ -25,11 +25,11 @@ program juego {
 	
 	//Modelo de zombis fijos por Fila...
 	
-	game.onCollideDo(otroZombi0,{proyectil=>proyectil.hacerDanio(otroZombi0)})
-	game.onCollideDo(otroZombi1,{proyectil=>proyectil.hacerDanio(otroZombi1)})
-	game.onCollideDo(otroZombi2,{proyectil=>proyectil.hacerDanio(otroZombi2)})
-	game.onCollideDo(otroZombi3,{proyectil=>proyectil.hacerDanio(otroZombi3)})
-	game.onCollideDo(otroZombi4,{proyectil=>proyectil.hacerDanio(otroZombi4)})
+	game.onCollideDo(otroZombi0,{proyectil=>proyectil.hacerDanio(otroZombi0,proyectil)})
+	game.onCollideDo(otroZombi1,{proyectil=>proyectil.hacerDanio(otroZombi1,proyectil)})
+	game.onCollideDo(otroZombi2,{proyectil=>proyectil.hacerDanio(otroZombi2,proyectil)})
+	game.onCollideDo(otroZombi3,{proyectil=>proyectil.hacerDanio(otroZombi3,proyectil)})
+	game.onCollideDo(otroZombi4,{proyectil=>proyectil.hacerDanio(otroZombi4,proyectil)})
 	
 	movimientos.movimientosOtroZombi()
 
