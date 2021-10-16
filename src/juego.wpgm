@@ -35,7 +35,7 @@ program juego {
 
 	//teclado
 	keyboard.a().onPressDo{
-		selector.plantar()
+		selector.plantarLanzaGuisantes()
 		
 	}
 	keyboard.s().onPressDo{

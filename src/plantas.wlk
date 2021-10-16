@@ -6,9 +6,10 @@ object selector{
 	const property image = "crosshair025.png"
 	var espacioOcupado=false
 	
-	method plantar(){
+	method hacerDanio(unZombi,proyectil)=0
+	method plantarLanzaGuisantes(){
 		espacioOcupado = self.algoPlantado()
-		const temp = new Planta(position=position)
+		const temp = new LanzaGuisantes(position=position)
 		game.addVisual(temp)
 		return temp.disparar()
 	}
@@ -39,16 +40,19 @@ class Planta {
 	var vida=100
 	var velocidad=2000
 	const property position=0
-	method image() {
-		
-		return "image-asset.png"
+	
+	
+	
+	method hacerDanio(unZombi,proyectil){ //proyectil es self
+				game.removeVisual(proyectil)
 	}
+	
+}
+class LanzaGuisantes inherits Planta{
+	method image() {return "image-asset.png"}
 	method disparar() = game.onTick(velocidad, "Disparar", { => selector.nuevoDisparo((self.position()).right(1))})
 	
-	method recibirDanio(){
-	}
-	method morir(){		
-	}
+	
 }
 class PlantaGirasol inherits Planta{ 
 	override method image() {return "girasol.png"}
