@@ -31,6 +31,7 @@ object selector{
 	method nuevoDisparo(posicion){
 		const temp = new Disparo(position = posicion)
 		game.addVisual(temp)
+		sonidoDisparo.play()
 		return temp.moverse()
 	}
 	
@@ -98,3 +99,14 @@ class Disparo {
 	const cortadora2 = new Cortadora (position = game.at(0, 2))
 	const cortadora3 = new Cortadora (position = game.at(0, 3))
 	const cortadora4 = new Cortadora (position = game.at(0, 4))
+
+object musicaFondo {
+	method play(){
+		game.sound("plantas-vs-zombies.mp3").play()
+	}
+}
+object sonidoDisparo {
+	method play(){
+		return game.sound("disparos.mp3").play()
+	}
+}

@@ -42,5 +42,13 @@ program juego {
 		selector.plantarGirasol()
 		
 	}
+	
+	// SONIDOS
+	
+	const sonidoFondo = game.sound("plantas-vs-zombies.mp3")
+	sonidoFondo.shouldLoop(true)
+	keyboard.p().onPressDo({sonidoFondo.pause()})
+	keyboard.m().onPressDo({sonidoFondo.volume(0.1)})
+	game.schedule(500, {sonidoFondo.play()})
 	game.start()
 }
