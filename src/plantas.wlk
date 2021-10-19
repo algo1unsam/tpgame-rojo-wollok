@@ -116,10 +116,12 @@ object sonidoDisparo inherits Sonidos{
 	override method play(){
 		return game.sound("disparos.mp3").play()
 	}
+}
+
 object sonidoCortadoraPasto inherits Sonidos{
 	override method play(){
 		return game.sound("cortadoraPasto.mp3").play()
 	}
 	
-	
 }
+//nada
