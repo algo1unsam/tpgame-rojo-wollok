@@ -92,7 +92,11 @@ class Disparo {
 			game.onTick(200, "atropella", { self.move(self.position().right(1)) })
 			unZombie.revive()}
 		method move(nuevaPosicion) {
+		if (nuevaPosicion.x()==1) self.sonidoAtropello()
 		self.position(nuevaPosicion)}
+		method sonidoAtropello(){
+			return sonidoCortadoraPasto.play()
+			}
 		}
 	const cortadora0 = new Cortadora (position = game.at(0, 0))
 	const cortadora1 = new Cortadora (position = game.at(0, 1))
@@ -100,13 +104,22 @@ class Disparo {
 	const cortadora3 = new Cortadora (position = game.at(0, 3))
 	const cortadora4 = new Cortadora (position = game.at(0, 4))
 
-object musicaFondo {
-	method play(){
+class Sonidos {
+	method play()
+}
+object musicaFondo inherits Sonidos {
+	override method play(){
 		game.sound("plantas-vs-zombies.mp3").play()
 	}
 }
-object sonidoDisparo {
-	method play(){
+object sonidoDisparo inherits Sonidos{
+	override method play(){
 		return game.sound("disparos.mp3").play()
 	}
+object sonidoCortadoraPasto inherits Sonidos{
+	override method play(){
+		return game.sound("cortadoraPasto.mp3").play()
+	}
+	
+	
 }
