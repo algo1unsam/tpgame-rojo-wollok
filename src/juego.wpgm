@@ -23,6 +23,9 @@ program juego {
 	//Modelo de creacion de zombis random...
 	//game.onTick(10000,"inicializadorZombie",{ => inicializadorZombie.agregarZombie()})
 	
+	
+	game.onTick(500,"generadorDeSoles",{ => generadorDeSoles.agregarSol()})
+	
 	//Modelo de zombis fijos por Fila...
 	
 	game.onCollideDo(otroZombi0,{proyectil=>proyectil.hacerDanio(otroZombi0,proyectil)})

@@ -1,13 +1,14 @@
 import wollok.game.*
 import plantas.*
 
-object inicializadorZombie{
+object generadorDeSoles{
 	var x=0
+	var y=0
 	
-	method agregarZombie(){
-		const temp = new Zombie(position = game.at(14,x.randomUpTo(4)))
+	method agregarSol(){
+		const temp = new Sol(position = game.at(x.randomUpTo(15),y.randomUpTo(4)))
 		game.addVisual(temp)
-		return temp.moverse()
+		//return temp.moverse()
 		
 	}
 }
@@ -46,6 +47,26 @@ object movimientos {
 	}
 
 }
+class Sol{
+	
+	var property position=0
+	
+	method image(){
+		return "Sol.png"
+	}
+	
+	method atacar(){
+		
+	}
+	method hacerDanio(par1,par2){
+
+	}
+	method recoger(){
+		game.removeTickEvent("Movement"+self.identity())
+	
+	}
+	
+}
 class Zombie{
 	const velocidad=4000
 	var vida=100
@@ -72,8 +93,8 @@ class Zombie{
 	}
 	
 }
-const otroZombi0 = new OtroZombi(position = game.at(15, 0), image = "zomby.png")
+const otroZombi0 = new OtroZombi(position = game.at(15, 0), image = "zombi4.png")
 const otroZombi1 = new OtroZombi(position = game.at(15, 1), image = "zomby.png")
-const otroZombi2 = new OtroZombi(position = game.at(15, 2), image = "zomby.png")
-const otroZombi3 = new OtroZombi(position = game.at(15, 3), image = "zomby.png")
-const otroZombi4 = new OtroZombi(position = game.at(15, 4), image = "zomby.png")
+const otroZombi2 = new OtroZombi(position = game.at(15, 2), image = "zombi7.png")
+const otroZombi3 = new OtroZombi(position = game.at(15, 3), image = "zombicumple.png")
+const otroZombi4 = new OtroZombi(position = game.at(15, 4), image = "zombi6.png")
