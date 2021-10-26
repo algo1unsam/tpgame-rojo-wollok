@@ -24,7 +24,7 @@ program juego {
 	//game.onTick(10000,"inicializadorZombie",{ => inicializadorZombie.agregarZombie()})
 	
 	
-	game.onTick(500,"generadorDeSoles",{ => generadorDeSoles.agregarSol()})
+	game.onTick(5000,"generadorDeSoles",{ => generadorDeSoles.agregarSol()})
 	
 	//Modelo de zombis fijos por Fila...
 	
@@ -43,6 +43,10 @@ program juego {
 	}
 	keyboard.s().onPressDo{
 		selector.plantarGirasol()
+		
+	}
+	keyboard.r().onPressDo{
+		selector.recogerSol()
 		
 	}
 	game.start()
