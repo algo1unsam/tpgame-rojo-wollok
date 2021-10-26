@@ -23,6 +23,9 @@ program juego {
 	//Modelo de creacion de zombis random...
 	game.onTick(10000,"inicializadorZombie",{ => inicializadorZombie.agregarZombie()})
 	
+	
+	//game.onTick(5000,"generadorDeSoles",{ => generadorDeSoles.agregarSol()})
+	
 	//Modelo de zombis fijos por Fila...
 	
 	/*game.onCollideDo(otroZombi0,{proyectil=>proyectil.hacerDanio(otroZombi0,proyectil)})
@@ -42,8 +45,14 @@ program juego {
 		selector.plantarGirasol()
 		
 	}
+<<<<<<< HEAD
 	keyboard.z().onPressDo{
 		selector.totalDinero()
+=======
+	keyboard.r().onPressDo{
+		selector.recogerSol()
+		
+>>>>>>> branch 'master' of git@github.com:algo1unsam/tpgame-rojo-wollok.git
 	}
 	game.start()
 }

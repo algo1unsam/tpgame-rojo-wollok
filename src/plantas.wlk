@@ -1,6 +1,8 @@
 import wollok.game.*
 import zombies.*
 
+object billetera{} // 
+
 object selector{
 	var property position = game.at(0,3)
 	const property image = "crosshair025.png"
