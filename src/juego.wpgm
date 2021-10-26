@@ -9,29 +9,29 @@ program juego {
 	game.height(5)
 	game.width(15)
 	game.ground("background.jpg")
-	game.addVisual(otroZombi0)
+	/*game.addVisual(otroZombi0)
 	game.addVisual(otroZombi1)
 	game.addVisual(otroZombi2)
 	game.addVisual(otroZombi3)
-	game.addVisual(otroZombi4)
+	game.addVisual(otroZombi4)*/
 	game.addVisual(cortadora0)
 	game.addVisual(cortadora1)
 	game.addVisual(cortadora2)
 	game.addVisual(cortadora3)
 	game.addVisual(cortadora4)
-	
+
 	//Modelo de creacion de zombis random...
-	//game.onTick(10000,"inicializadorZombie",{ => inicializadorZombie.agregarZombie()})
+	game.onTick(10000,"inicializadorZombie",{ => inicializadorZombie.agregarZombie()})
 	
 	//Modelo de zombis fijos por Fila...
 	
-	game.onCollideDo(otroZombi0,{proyectil=>proyectil.hacerDanio(otroZombi0,proyectil)})
+	/*game.onCollideDo(otroZombi0,{proyectil=>proyectil.hacerDanio(otroZombi0,proyectil)})
 	game.onCollideDo(otroZombi1,{proyectil=>proyectil.hacerDanio(otroZombi1,proyectil)})
 	game.onCollideDo(otroZombi2,{proyectil=>proyectil.hacerDanio(otroZombi2,proyectil)})
 	game.onCollideDo(otroZombi3,{proyectil=>proyectil.hacerDanio(otroZombi3,proyectil)})
-	game.onCollideDo(otroZombi4,{proyectil=>proyectil.hacerDanio(otroZombi4,proyectil)})
+	game.onCollideDo(otroZombi4,{proyectil=>proyectil.hacerDanio(otroZombi4,proyectil)})*/
 	
-	movimientos.movimientosOtroZombi()
+	//movimientos.movimientosOtroZombi()
 
 	//teclado
 	keyboard.a().onPressDo{
@@ -41,6 +41,9 @@ program juego {
 	keyboard.s().onPressDo{
 		selector.plantarGirasol()
 		
+	}
+	keyboard.z().onPressDo{
+		selector.totalDinero()
 	}
 	game.start()
 }

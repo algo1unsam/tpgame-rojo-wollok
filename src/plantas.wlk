@@ -8,22 +8,21 @@ object selector{
 	
 	method hacerDanio(unZombi,proyectil)=0
 	method plantarLanzaGuisantes(){
-		espacioOcupado = self.algoPlantado()
-		const temp = new LanzaGuisantes(position=position)
-		game.addVisual(temp)
-		return temp.disparar()
+		self.plantar(new LanzaGuisantes(position=position))
 	}
 	method plantarGirasol(){
-		espacioOcupado = self.algoPlantado()
-		const temp = new PlantaGirasol(position=position)
-		game.addVisual(temp)
-		return temp.disparar()
+		self.plantar(new PlantaGirasol(position=position))
 	}
-	
+	method plantar(planta) {
+		espacioOcupado = self.algoPlantado()
+		game.addVisual(planta)
+		planta.disparar()
+	}
 	method algoPlantado(){
 		espacioOcupado = game.colliders(self)
 		if (not espacioOcupado.isEmpty()){
 			self.error("Ya esta ocupado este espacio")
+			//agregar un sonido
 		}
 		return espacioOcupado
 	}
@@ -33,34 +32,51 @@ object selector{
 		game.addVisual(temp)
 		return temp.moverse()
 	}
+	method totalDinero(){
+		return game.say(self,cartera.total().printString())
+	}
+	
+	
+}
+object cartera {
+	var dinero = 50
+	
+	method recibirDinero(equis){
+		dinero+=equis
+	}
+	method total(){
+		return dinero
+	}
 	
 }
 
 class Planta {
 	var vida=100
-	var velocidad=2000
+	var velocidad=4000
 	const property position=0
 	
-	
-	
+	method image()
+	method disparar()
 	method hacerDanio(unZombi,proyectil){ //proyectil es self
 				game.removeVisual(proyectil)
 	}
 	
 }
 class LanzaGuisantes inherits Planta{
-	method image() {return "image-asset.png"}
-	method disparar() = game.onTick(velocidad, "Disparar", { => selector.nuevoDisparo((self.position()).right(1))})
+	override method image() {return "image-asset.png"}
+	override method disparar() = game.onTick(velocidad, "Disparar", { => selector.nuevoDisparo((self.position()).right(1))})
 	
 	
 }
 class PlantaGirasol inherits Planta{ 
 	override method image() {return "girasol.png"}
-	override method disparar() { return 0 }
+	override method disparar() = game.onTick(5000,"Moneda",{=>cartera.recibirDinero(25) })
+	
+	
 }
 
 class Disparo {
-	const property velocidad=300
+	const property velocidad=40
 	var property position=0
 	const property danio=1
 	method image(){

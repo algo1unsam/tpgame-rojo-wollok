@@ -5,9 +5,10 @@ object inicializadorZombie{
 	var x=0
 	
 	method agregarZombie(){
-		const temp = new Zombie(position = game.at(14,x.randomUpTo(4)))
-		game.addVisual(temp)
-		return temp.moverse()
+		const unZombie = new OtroZombi(position = game.at(14,x.randomUpTo(4)))
+		game.addVisual(unZombie)
+		game.onCollideDo(unZombie,{proyectil=>proyectil.hacerDanio(unZombie,proyectil)})
+		unZombie.moverse()
 		
 	}
 }
@@ -17,7 +18,9 @@ class OtroZombi{
 	var property position=0
 	var contadorDeRevivir = 0
 	
-	var property image
+	method image(){
+		return "zomby.png"
+	}
 	method vida() { return vida}
 	method golpear() {vida -= 25 } 
 	method avanzarIzquierda(nuevaPosicion) {
@@ -35,7 +38,7 @@ class OtroZombi{
 	}
 	method hacerDanio(unZombi,proyectil) = 0
 }
-object movimientos {
+/*object movimientos {
 
 	method movimientosOtroZombi() {
 		game.onTick(6500, "avanza", { otroZombi0.avanzarIzquierda(otroZombi0.position().left(1))})
@@ -45,7 +48,7 @@ object movimientos {
 		game.onTick(7000, "avanza", { otroZombi4.avanzarIzquierda(otroZombi4.position().left(1))})
 	}
 
-}
+}*/
 class Zombie{
 	const velocidad=4000
 	var vida=100
@@ -72,8 +75,8 @@ class Zombie{
 	}
 	
 }
-const otroZombi0 = new OtroZombi(position = game.at(15, 0), image = "zomby.png")
+/*const otroZombi0 = new OtroZombi(position = game.at(15, 0), image = "zomby.png")
 const otroZombi1 = new OtroZombi(position = game.at(15, 1), image = "zomby.png")
 const otroZombi2 = new OtroZombi(position = game.at(15, 2), image = "zomby.png")
 const otroZombi3 = new OtroZombi(position = game.at(15, 3), image = "zomby.png")
-const otroZombi4 = new OtroZombi(position = game.at(15, 4), image = "zomby.png")
+const otroZombi4 = new OtroZombi(position = game.at(15, 4), image = "zomby.png")*/
