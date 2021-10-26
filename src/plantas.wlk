@@ -86,10 +86,11 @@ class Disparo {
 	}
 	
 	method moverse(){
-		return game.onTick(velocidad, "Movement"+self.identity(), { self.move(self.position().right(1)) })
+		game.onTick(velocidad, "Movement"+self.identity(), { self.move(self.position().right(1)) })
 	}
 	method move(nuevaPosicion) {
 		self.position(nuevaPosicion)
+		
 	}
 	
 	method hacerDanio(unZombie,proyectil){

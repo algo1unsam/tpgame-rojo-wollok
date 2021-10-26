@@ -1,22 +1,14 @@
 import wollok.game.*
 import plantas.*
 
-object generadorDeSoles{
-	var x=0
+object inicializadorZombie{
+	var x=0	
 	var y=0
-	
-<<<<<<< HEAD
 	method agregarZombie(){
 		const unZombie = new OtroZombi(position = game.at(14,x.randomUpTo(4)))
 		game.addVisual(unZombie)
 		game.onCollideDo(unZombie,{proyectil=>proyectil.hacerDanio(unZombie,proyectil)})
-		unZombie.moverse()
-=======
-	method agregarSol(){
-		const temp = new Sol(position = game.at(x.randomUpTo(15),y.randomUpTo(4)))
-		game.addVisual(temp)
-		//return temp.moverse()
->>>>>>> branch 'master' of git@github.com:algo1unsam/tpgame-rojo-wollok.git
+		game.onTick(5000, "avanza", { unZombie.avanzarIzquierda(unZombie.position().left(1))})
 		
 	}
 }
@@ -56,31 +48,7 @@ class OtroZombi{
 		game.onTick(7000, "avanza", { otroZombi4.avanzarIzquierda(otroZombi4.position().left(1))})
 	}
 
-<<<<<<< HEAD
 }*/
-=======
-}
-class Sol{
-	
-	var property position=0
-	
-	method image(){
-		return "Sol.png"
-	}
-	
-	method atacar(){
-		
-	}
-	method hacerDanio(par1,par2){
-
-	}
-	method recoger(){
-		game.removeTickEvent("Movement"+self.identity())
-	
-	}
-	
-}
->>>>>>> branch 'master' of git@github.com:algo1unsam/tpgame-rojo-wollok.git
 class Zombie{
 	const velocidad=4000
 	var vida=100
@@ -107,18 +75,8 @@ class Zombie{
 	}
 	
 }
-<<<<<<< HEAD
 /*const otroZombi0 = new OtroZombi(position = game.at(15, 0), image = "zomby.png")
-=======
-const otroZombi0 = new OtroZombi(position = game.at(15, 0), image = "zombi4.png")
->>>>>>> branch 'master' of git@github.com:algo1unsam/tpgame-rojo-wollok.git
 const otroZombi1 = new OtroZombi(position = game.at(15, 1), image = "zomby.png")
-<<<<<<< HEAD
 const otroZombi2 = new OtroZombi(position = game.at(15, 2), image = "zomby.png")
 const otroZombi3 = new OtroZombi(position = game.at(15, 3), image = "zomby.png")
 const otroZombi4 = new OtroZombi(position = game.at(15, 4), image = "zomby.png")*/
-=======
-const otroZombi2 = new OtroZombi(position = game.at(15, 2), image = "zombi7.png")
-const otroZombi3 = new OtroZombi(position = game.at(15, 3), image = "zombicumple.png")
-const otroZombi4 = new OtroZombi(position = game.at(15, 4), image = "zombi6.png")
->>>>>>> branch 'master' of git@github.com:algo1unsam/tpgame-rojo-wollok.git
