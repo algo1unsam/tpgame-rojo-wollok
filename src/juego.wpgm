@@ -13,3 +13,5 @@ program juego {
 	
 	}
 
+// cuando un zombi se come una planta que dispara, el disparo sigue apareciendo
+// cuando un zombi llega a la casa y no hay cortadora el juego termina

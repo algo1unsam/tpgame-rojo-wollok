@@ -3,4 +3,5 @@ test "testX" {
 
 	assert.that(true)
 
-}
+}//test hacer danio	
+//movimiento del zombi

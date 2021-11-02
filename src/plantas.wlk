@@ -8,7 +8,7 @@ object selector{
 	const property image = "crosshair025.png"
 	var espacioOcupado=false
 	
-	method hacerDanio(unZombi,proyectil)=0
+	method hacerDanio(unZombi)=0
 	method plantarLanzaGuisantes(){
 		self.plantar(new LanzaGuisantes(position=position))
 	}
@@ -29,10 +29,10 @@ object selector{
 		return espacioOcupado
 	}
 	
-	method nuevoDisparo(posicion){
+	method nuevoDisparo(posicion){ //mover a clase plantas
 		const temp = new Disparo(position = posicion)
 		game.addVisual(temp)
-		return temp.moverse()
+		temp.moverse()
 	}
 	method totalDinero(){
 		return game.say(self,cartera.total().printString())
@@ -54,32 +54,33 @@ object cartera {
 
 class Planta {
 	var vida=100
-	var velocidad=4000
-	const property position=0
+	var velocidad=4000 // es distinto para cada instancia? o se define por subclase
+	//si es por subclase convertirlo en metodo
+	const property position
 	
 	method image()
 	method disparar()
-	method hacerDanio(unZombi,proyectil){ //proyectil es self
-				game.removeVisual(proyectil)
+	method hacerDanio(unZombi){ //proyectil es self
+				game.removeVisual(self)//falta sacar el ontick del disparo
 	}
 	
 }
 class LanzaGuisantes inherits Planta{
 	override method image() {return "image-asset.png"}
 	override method disparar() = game.onTick(velocidad, "Disparar", { => selector.nuevoDisparo((self.position()).right(1))})
-	
+	//pasar el ontick a clase planta, y dejar lo otro aca abajo
 	
 }
 class PlantaGirasol inherits Planta{ 
 	override method image() {return "girasol.png"}
-	override method disparar() = game.onTick(5000,"Moneda",{=>cartera.recibirDinero(25) })
+	override method disparar() = game.onTick(velocidad,"Moneda",{=>cartera.recibirDinero(25) })
 	
 	
 }
 
 class Disparo {
 	const property velocidad=40
-	var property position=0
+	var property position
 	const property danio=1
 	method image(){
 		return "proyectil.png"
@@ -93,11 +94,11 @@ class Disparo {
 		
 	}
 	
-	method hacerDanio(unZombie,proyectil){
+	method hacerDanio(unZombie){
 		if (unZombie.vida()>1) { 
 			unZombie.golpear()
-			game.removeVisual(proyectil)
-		} else unZombie.revive()
+			game.removeVisual(self)
+		} else {game.removeVisual(unZombie)}
 	}
 	
 	}
@@ -106,9 +107,11 @@ class Disparo {
 		var image = "cortadora.png"
 		var property position=0
 		method image() = image
-		method hacerDanio(unZombie,proyectil){ 
+		method hacerDanio(unZombie){ 
 			game.onTick(200, "atropella", { self.move(self.position().right(1)) })
-			unZombie.revive()}
+			game.removeVisual(unZombie)
+		}
+			
 		method move(nuevaPosicion) {
 		self.position(nuevaPosicion)}
 		}
