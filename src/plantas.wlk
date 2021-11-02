@@ -4,7 +4,7 @@ import zombies.*
 object billetera{} // 
 
 object selector{
-	var property position = game.at(0,3)
+	var property position = game.at(3,2)
 	const property image = "crosshair025.png"
 	var espacioOcupado=false
 	
@@ -112,8 +112,8 @@ class Disparo {
 		method move(nuevaPosicion) {
 		self.position(nuevaPosicion)}
 		}
-	const cortadora0 = new Cortadora (position = game.at(0, 0))
-	const cortadora1 = new Cortadora (position = game.at(0, 1))
-	const cortadora2 = new Cortadora (position = game.at(0, 2))
-	const cortadora3 = new Cortadora (position = game.at(0, 3))
-	const cortadora4 = new Cortadora (position = game.at(0, 4))
+	const cortadora0 = new Cortadora (position = game.at(2, 0))
+	const cortadora1 = new Cortadora (position = game.at(2, 1))
+	const cortadora2 = new Cortadora (position = game.at(2, 2))
+	const cortadora3 = new Cortadora (position = game.at(2, 3))
+	const cortadora4 = new Cortadora (position = game.at(2, 4))

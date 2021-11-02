@@ -1,58 +1,15 @@
 import wollok.game.*
 import plantas.*
 import zombies.*
+import configuracion.*
 
 program juego {
-	var unDisparo
-	game.title("Plantoides vs Zomboides")
-	game.addVisualCharacter(selector)
+	
+ 	game.title("Plantoides vs Zomboides")
 	game.height(5)
 	game.width(15)
-	game.ground("background.jpg")
-	/*game.addVisual(otroZombi0)
-	game.addVisual(otroZombi1)
-	game.addVisual(otroZombi2)
-	game.addVisual(otroZombi3)
-	game.addVisual(otroZombi4)*/
-	game.addVisual(cortadora0)
-	game.addVisual(cortadora1)
-	game.addVisual(cortadora2)
-	game.addVisual(cortadora3)
-	game.addVisual(cortadora4)
-
-	//Modelo de creacion de zombis random...
-	
-	game.onTick(10000,"inicializadorZombie",{ => inicializadorZombie.agregarZombie()})
-	
-	
-	//game.onTick(5000,"generadorDeSoles",{ => generadorDeSoles.agregarSol()})
-	
-	//Modelo de zombis fijos por Fila...
-	
-	/*game.onCollideDo(otroZombi0,{proyectil=>proyectil.hacerDanio(otroZombi0,proyectil)})
-	game.onCollideDo(otroZombi1,{proyectil=>proyectil.hacerDanio(otroZombi1,proyectil)})
-	game.onCollideDo(otroZombi2,{proyectil=>proyectil.hacerDanio(otroZombi2,proyectil)})
-	game.onCollideDo(otroZombi3,{proyectil=>proyectil.hacerDanio(otroZombi3,proyectil)})
-	game.onCollideDo(otroZombi4,{proyectil=>proyectil.hacerDanio(otroZombi4,proyectil)})*/
-	
-	//movimientos.movimientosOtroZombi()
-
-	//teclado
-	keyboard.a().onPressDo{
-		selector.plantarLanzaGuisantes()
-		
-	}
-	keyboard.s().onPressDo{
-		selector.plantarGirasol()
-		
-	}
-
-	keyboard.z().onPressDo{
-		selector.totalDinero()
-	}
-	/*keyboard.r().onPressDo{
-		selector.recogerSol()
-	}*/
+	configuracion.pantallaInicio()
 	game.start()
+	
 	}
 
