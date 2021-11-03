@@ -44,7 +44,12 @@ class OtroZombi {
 	}
 
 	method hacerDanio(unZombi, proyectil) = 0
-
+	
+	method meMuero(){
+		game.removeVisual(self)
+		game.removeTickEvent("avanza"+self.identity())
+	}
+	
 	method ganar() {
 		if (position.x() == 1) {
 			terminar.cerrar()

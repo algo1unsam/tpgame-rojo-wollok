@@ -29,11 +29,8 @@ object selector{
 		return espacioOcupado
 	}
 	
-	method nuevoDisparo(posicion){ //mover a clase plantas
-		const temp = new Disparo(position = posicion)
-		game.addVisual(temp)
-		temp.moverse()
-	}
+	method meMuero(){}
+	
 	method totalDinero(){
 		return game.say(self,cartera.total().printString())
 	}
@@ -58,23 +55,38 @@ class Planta {
 	//si es por subclase convertirlo en metodo
 	const property position
 	
+	method nuevoDisparo(posicion){
+		const temp = new Disparo(position = posicion)
+		game.addVisual(temp)
+		temp.moverse()
+	}
+	
 	method image()
 	method disparar()
 	method hacerDanio(unZombi){ //proyectil es self
-				game.removeVisual(self)//falta sacar el ontick del disparo
+				game.removeVisual(self)
 	}
 	
 }
+
 class LanzaGuisantes inherits Planta{
 	override method image() {return "image-asset.png"}
-	override method disparar() = game.onTick(velocidad, "Disparar", { => selector.nuevoDisparo((self.position()).right(1))})
+	override method disparar() = game.onTick(velocidad, "Disparar"+self.identity(), { => self.nuevoDisparo((self.position()).right(1))})
+	override method hacerDanio(unZombi){
+		super(unZombi)
+		game.removeTickEvent("Disparar"+self.identity())
+	}
+	
 	//pasar el ontick a clase planta, y dejar lo otro aca abajo
 	
 }
 class PlantaGirasol inherits Planta{ 
 	override method image() {return "girasol.png"}
-	override method disparar() = game.onTick(velocidad,"Moneda",{=>cartera.recibirDinero(25) })
-	
+	override method disparar() = game.onTick(velocidad,"Moneda"+self.identity(),{=>cartera.recibirDinero(25) })
+	override method hacerDanio(unZombi){
+		super(unZombi)
+		game.removeTickEvent("Moneda"+self.identity())
+	}
 	
 }
 
@@ -94,11 +106,17 @@ class Disparo {
 		
 	}
 	
+	method meMuero(){
+		game.removeVisual(self)
+		game.removeTickEvent("Movement"+self.identity())
+	}
+	
 	method hacerDanio(unZombie){
 		if (unZombie.vida()>1) { 
 			unZombie.golpear()
-			game.removeVisual(self)
-		} else {game.removeVisual(unZombie)}
+			self.meMuero()
+		} else {game.removeVisual(unZombie)
+			 	self.meMuero()}
 	}
 	
 	}
@@ -109,7 +127,7 @@ class Disparo {
 		method image() = image
 		method hacerDanio(unZombie){ 
 			game.onTick(200, "atropella", { self.move(self.position().right(1)) })
-			game.removeVisual(unZombie)
+			unZombie.meMuero()
 		}
 			
 		method move(nuevaPosicion) {

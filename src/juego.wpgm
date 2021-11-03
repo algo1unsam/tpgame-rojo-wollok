@@ -2,6 +2,7 @@ import wollok.game.*
 import plantas.*
 import zombies.*
 import configuracion.*
+import bordes.*
 
 program juego {
 	
@@ -9,6 +10,7 @@ program juego {
 	game.height(5)
 	game.width(15)
 	configuracion.pantallaInicio()
+	borde.colocar()
 	game.start()
 	
 	}
