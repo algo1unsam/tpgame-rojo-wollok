@@ -1,7 +1,7 @@
 import wollok.game.*
 import zombies.*
 
-object billetera{} // 
+
 
 object selector{
 	var property position = game.at(3,2)
@@ -9,11 +9,15 @@ object selector{
 	var espacioOcupado=false
 	
 	method hacerDanio(unZombi)=0
+	
 	method plantarLanzaGuisantes(){
 		self.plantar(new LanzaGuisantes(position=position))
 	}
 	method plantarGirasol(){
 		self.plantar(new PlantaGirasol(position=position))
+	}
+	method plantarPapa(){
+		self.plantar(new PlantaEscudo(position=position))
 	}
 	method plantar(planta) {
 		espacioOcupado = self.algoPlantado()
@@ -73,7 +77,7 @@ class Planta {
 	}
 	
 }
-
+ 
 class LanzaGuisantes inherits Planta{
 	override method precio()=100
 	override method image() {return "image-asset.png"}
@@ -100,6 +104,7 @@ class PlantaEscudo inherits Planta{
 	
 	override method image() = return "platazana.png"
 	override method vida()=250
+	override method disparar()=null
 }
 
 class Disparo {

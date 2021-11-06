@@ -36,16 +36,17 @@ object configuracion {
 	game.addVisual(cortadora4)
 
 
-	game.onTick(10000,"inicializadorZombie",{ => inicializadorZombie.agregarZombie()})
-
+	game.onTick(15000,"inicializadorZombie",{ => inicializadorZombie.agregarZombie()})
+	game.onTick(2000,"monedasPasivas",{=>cartera.recibirDinero(10)})
 	keyboard.a().onPressDo{
 		selector.plantarLanzaGuisantes()
 		
 	}
 	keyboard.s().onPressDo{selector.plantarGirasol()}
+	keyboard.d().onPressDo{selector.plantarGirasol()}
 
 	keyboard.z().onPressDo{selector.totalDinero()}
-	keyboard.m().onPressDo{musicaInicio.stop()}
+	keyboard.m().onPressDo{musicaDeFondo.stop()}
 	/*keyboard.r().onPressDo{
 		selector.recogerSol()
 	}*/
