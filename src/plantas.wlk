@@ -17,8 +17,11 @@ object selector{
 	}
 	method plantar(planta) {
 		espacioOcupado = self.algoPlantado()
-		game.addVisual(planta)
-		planta.disparar()
+		if(planta.precio()<=cartera.total()){
+			game.addVisual(planta)
+			planta.disparar()
+			cartera.restarDinero(planta.precio())		
+		}
 	}
 	method algoPlantado(){
 		espacioOcupado = game.colliders(self)
@@ -43,6 +46,9 @@ object cartera {
 	method recibirDinero(equis){
 		dinero+=equis
 	}
+	method restarDinero(equis){
+		dinero-=equis
+	}
 	method total(){
 		return dinero
 	}
@@ -51,9 +57,8 @@ object cartera {
 
 class Planta {
 	var vida=100
-	var velocidad=4000 // es distinto para cada instancia? o se define por subclase
-	//si es por subclase convertirlo en metodo
 	const property position
+	const property precio = 1
 	
 	method nuevoDisparo(posicion){
 		const temp = new Disparo(position = posicion)
@@ -70,8 +75,9 @@ class Planta {
 }
 
 class LanzaGuisantes inherits Planta{
+	override method precio()=75
 	override method image() {return "image-asset.png"}
-	override method disparar() = game.onTick(velocidad, "Disparar"+self.identity(), { => self.nuevoDisparo((self.position()).right(1))})
+	override method disparar() = game.onTick(7500, "Disparar"+self.identity(), { => self.nuevoDisparo((self.position()).right(1))})
 	override method hacerDanio(unZombi){
 		super(unZombi)
 		game.removeTickEvent("Disparar"+self.identity())
@@ -81,8 +87,9 @@ class LanzaGuisantes inherits Planta{
 	
 }
 class PlantaGirasol inherits Planta{ 
+	override method precio()=50
 	override method image() {return "girasol.png"}
-	override method disparar() = game.onTick(velocidad,"Moneda"+self.identity(),{=>cartera.recibirDinero(25) })
+	override method disparar() = game.onTick(5000,"Moneda"+self.identity(),{=>cartera.recibirDinero(25) })
 	override method hacerDanio(unZombi){
 		super(unZombi)
 		game.removeTickEvent("Moneda"+self.identity())
@@ -126,10 +133,13 @@ class Disparo {
 		var property position=0
 		method image() = image
 		method hacerDanio(unZombie){ 
-			game.onTick(200, "atropella", { self.move(self.position().right(1)) })
+			game.onTick(200, "atropella"+self.identity(), { self.move(self.position().right(1)) })
 			unZombie.meMuero()
 		}
-			
+		method meMuero(){
+			game.removeVisual(self)
+			game.removeTickEvent("atropella"+self.identity())
+		}
 		method move(nuevaPosicion) {
 		self.position(nuevaPosicion)}
 		}
