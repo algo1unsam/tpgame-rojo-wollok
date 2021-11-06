@@ -14,6 +14,7 @@ object configuracion {
 		musicaInicio.shouldLoop(true)
 		game.schedule(50, {musicaInicio.play()})
 		keyboard.enter().onPressDo{ self.fondoJuego()}
+		keyboard.m().onPressDo{musicaInicio.stop()}
 	}
 
 	method fondoJuego() {
@@ -41,14 +42,10 @@ object configuracion {
 		selector.plantarLanzaGuisantes()
 		
 	}
-	keyboard.s().onPressDo{
-		selector.plantarGirasol()
-		
-	}
+	keyboard.s().onPressDo{selector.plantarGirasol()}
 
-	keyboard.z().onPressDo{
-		selector.totalDinero()
-	}
+	keyboard.z().onPressDo{selector.totalDinero()}
+	keyboard.m().onPressDo{musicaInicio.stop()}
 	/*keyboard.r().onPressDo{
 		selector.recogerSol()
 	}*/

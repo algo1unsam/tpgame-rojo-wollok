@@ -56,9 +56,9 @@ object cartera {
 }
 
 class Planta {
-	var vida=100
+	var property vida=100
 	const property position
-	const property precio = 1
+	const property precio = 50
 	
 	method nuevoDisparo(posicion){
 		const temp = new Disparo(position = posicion)
@@ -75,7 +75,7 @@ class Planta {
 }
 
 class LanzaGuisantes inherits Planta{
-	override method precio()=75
+	override method precio()=100
 	override method image() {return "image-asset.png"}
 	override method disparar() = game.onTick(7500, "Disparar"+self.identity(), { => self.nuevoDisparo((self.position()).right(1))})
 	override method hacerDanio(unZombi){
@@ -87,7 +87,7 @@ class LanzaGuisantes inherits Planta{
 	
 }
 class PlantaGirasol inherits Planta{ 
-	override method precio()=50
+	
 	override method image() {return "girasol.png"}
 	override method disparar() = game.onTick(5000,"Moneda"+self.identity(),{=>cartera.recibirDinero(25) })
 	override method hacerDanio(unZombi){
@@ -95,6 +95,11 @@ class PlantaGirasol inherits Planta{
 		game.removeTickEvent("Moneda"+self.identity())
 	}
 	
+}
+class PlantaEscudo inherits Planta{
+	
+	override method image() = return "platazana.png"
+	override method vida()=250
 }
 
 class Disparo {
