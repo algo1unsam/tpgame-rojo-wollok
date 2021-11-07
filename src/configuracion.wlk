@@ -43,7 +43,7 @@ object configuracion {
 		
 	}
 	keyboard.s().onPressDo{selector.plantarGirasol()}
-	keyboard.d().onPressDo{selector.plantarGirasol()}
+	keyboard.d().onPressDo{selector.plantarPapa()}
 
 	keyboard.z().onPressDo{selector.totalDinero()}
 	keyboard.m().onPressDo{musicaDeFondo.stop()}
