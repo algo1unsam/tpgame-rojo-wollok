@@ -47,7 +47,6 @@ object configuracion {
 
 	keyboard.z().onPressDo{selector.totalDinero()}
 	keyboard.m().onPressDo{musicaDeFondo.stop()}
-		keyboard.p().onPressDo{sonidoOcupado.play()}
 	/*keyboard.r().onPressDo{
 		selector.recogerSol()
 	}*/
@@ -60,6 +59,12 @@ object principio {
 	var property position = game.at(0, 0)
 	var property image = "start.png"
 	
+	
+}
+
+object final {
+	var property position = game.at(0,0)
+	var property image = "gameOver.jpg"
 	
 }
 object fondo {
@@ -80,12 +85,10 @@ object pressStart{
 	
 }
 object terminar {
-
-	const imagenFinal = "gameOver.jpg"
 	
 	method cerrar() {
 		
-		game.addVisual(imagenFinal)
+		game.addVisual(final)
 		game.schedule(50, {musicaDeFondo.stop()})
 		musicaFinal.shouldLoop(true)
 		game.schedule(50, {musicaFinal.play()})

@@ -41,6 +41,8 @@ class OtroZombi {
 	method avanzarIzquierda(nuevaPosicion) {
 		var y = nuevaPosicion.y()
 		if (nuevaPosicion == game.at(-1, y)) self.position(game.at(16, y)) else self.position(nuevaPosicion)
+		if (position.x() <= 1) {
+			terminar.cerrar()}
 	}
 
 	method hacerDanio(unZombi, proyectil) = 0
@@ -50,11 +52,7 @@ class OtroZombi {
 		game.removeTickEvent("avanza"+self.identity())
 	}
 	
-	method ganar() {
-		if (position.x() == 1) {
-			terminar.cerrar()
-		}
-	}
+ 
 
 }
 
