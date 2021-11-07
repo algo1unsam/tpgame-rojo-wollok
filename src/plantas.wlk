@@ -151,10 +151,28 @@ class Disparo {
 			game.removeTickEvent("atropella"+self.identity())
 		}
 		method move(nuevaPosicion) {
+			if (nuevaPosicion.x()==3) self.sonidoAtropello()
 		self.position(nuevaPosicion)}
+		
+		method sonidoAtropello(){
+			return sonidoCortadoraPasto.play()
 		}
+		}
+		
+class Sonidos {
+	method play()
+}
+
+object sonidoCortadoraPasto inherits Sonidos{
+	override method play(){
+		return game.sound("cortadoraPasto.mp3").play()
+	}
+}
+
 	const cortadora0 = new Cortadora (position = game.at(2, 0))
 	const cortadora1 = new Cortadora (position = game.at(2, 1))
 	const cortadora2 = new Cortadora (position = game.at(2, 2))
 	const cortadora3 = new Cortadora (position = game.at(2, 3))
 	const cortadora4 = new Cortadora (position = game.at(2, 4))
+
+	
