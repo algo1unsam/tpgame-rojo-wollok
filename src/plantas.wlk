@@ -30,8 +30,8 @@ object selector{
 	method algoPlantado(){
 		espacioOcupado = game.colliders(self)
 		if (not espacioOcupado.isEmpty()){
+			sonidoOcupado.play()
 			self.error("Ya esta ocupado este espacio")
-			//agregar un sonido
 		}
 		return espacioOcupado
 	}
@@ -67,6 +67,7 @@ class Planta {
 	method nuevoDisparo(posicion){
 		const temp = new Disparo(position = posicion)
 		game.addVisual(temp)
+		sonidoDisparo.play()
 		temp.moverse()
 	}
 	
@@ -166,6 +167,16 @@ class Sonidos {
 object sonidoCortadoraPasto inherits Sonidos{
 	override method play(){
 		return game.sound("cortadoraPasto.mp3").play()
+	}
+}
+object sonidoDisparo inherits Sonidos{
+	override method play(){
+		return game.sound("disparos.mp3").play()
+	}
+}
+object sonidoOcupado inherits Sonidos{
+	override method play(){
+		return game.sound("ocupado.mp3").play()
 	}
 }
 

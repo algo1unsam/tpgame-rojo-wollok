@@ -47,6 +47,7 @@ object configuracion {
 
 	keyboard.z().onPressDo{selector.totalDinero()}
 	keyboard.m().onPressDo{musicaDeFondo.stop()}
+		keyboard.p().onPressDo{sonidoOcupado.play()}
 	/*keyboard.r().onPressDo{
 		selector.recogerSol()
 	}*/
