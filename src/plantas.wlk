@@ -106,6 +106,13 @@ class PlantaEscudo inherits Planta{
 	override method image() = return "platazana.png"
 	override method vida()=250
 	override method disparar()=null
+	
+	override method hacerDanio(unZombi){
+		game.removeTickEvent("avanza"+unZombi.identity())
+		game.schedule(5000, {=> unZombi.comenzarAMoverse()})
+		super(unZombi)
+	}
+	
 }
 
 class Disparo {

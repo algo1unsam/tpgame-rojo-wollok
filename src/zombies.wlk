@@ -24,7 +24,7 @@ class OtroZombi {
 	
 	
 	method comenzarAMoverse(){
-		game.onTick(4000, "avanza"+self.identity(), { self.avanzarIzquierda(position.left(1))})
+		game.onTick(velocidad, "avanza"+self.identity(), { self.avanzarIzquierda(position.left(1))})
 	}
 	method image() {
 		return "zomby.png"

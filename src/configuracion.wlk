@@ -38,13 +38,9 @@ object configuracion {
 
 	game.onTick(15000,"inicializadorZombie",{ => inicializadorZombie.agregarZombie()})
 	game.onTick(2000,"monedasPasivas",{=>cartera.recibirDinero(10)})
-	keyboard.a().onPressDo{
-		selector.plantarLanzaGuisantes()
-		
-	}
+	keyboard.a().onPressDo{selector.plantarLanzaGuisantes()}
 	keyboard.s().onPressDo{selector.plantarGirasol()}
 	keyboard.d().onPressDo{selector.plantarPapa()}
-
 	keyboard.z().onPressDo{selector.totalDinero()}
 	keyboard.m().onPressDo{musicaDeFondo.stop()}
 	/*keyboard.r().onPressDo{
@@ -87,7 +83,7 @@ object pressStart{
 object terminar {
 	
 	method cerrar() {
-		
+		game.clear()
 		game.addVisual(final)
 		game.schedule(50, {musicaDeFondo.stop()})
 		musicaFinal.shouldLoop(true)
