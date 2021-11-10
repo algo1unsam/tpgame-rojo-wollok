@@ -28,9 +28,9 @@ object borde{
 	
 	const paredes = [bordeDer0, bordeDer1, bordeDer2, bordeDer3, bordeDer4, bordeIzq0, bordeIzq1, bordeIzq2, bordeIzq3, bordeIzq4]
 	
-	method colocar() = paredes.forEach({unBorde => game.addVisual(unBorde)
+	method colocar(){ paredes.forEach({unBorde => game.addVisual(unBorde)
 															unBorde.destruyo(unBorde)})
-																
+	}											
 	
 	
 }

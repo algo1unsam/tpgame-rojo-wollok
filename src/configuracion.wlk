@@ -25,15 +25,12 @@ object configuracion {
 	method configuracionInicio() {
 	game.removeVisual(pressStart)
 	game.removeVisual(principio)
+	game.addVisual(cartera)
 	game.addVisualCharacter(selector)
 	game.schedule(50, {musicaInicio.stop()})
 	musicaDeFondo.shouldLoop(true)
 	game.schedule(50, {musicaDeFondo.play()})
-    game.addVisual(cortadora0)
-	game.addVisual(cortadora1)
-	game.addVisual(cortadora2)
-	game.addVisual(cortadora3)
-	game.addVisual(cortadora4)
+  	cortadoras.forEach({unaCortadora => game.addVisual(unaCortadora)})
 
 
 	game.onTick(15000,"inicializadorZombie",{ => inicializadorZombie.agregarZombie()})
@@ -41,7 +38,6 @@ object configuracion {
 	keyboard.a().onPressDo{selector.plantarLanzaGuisantes()}
 	keyboard.s().onPressDo{selector.plantarGirasol()}
 	keyboard.d().onPressDo{selector.plantarPapa()}
-	keyboard.z().onPressDo{selector.totalDinero()}
 	keyboard.m().onPressDo{musicaDeFondo.stop()}
 	/*keyboard.r().onPressDo{
 		selector.recogerSol()

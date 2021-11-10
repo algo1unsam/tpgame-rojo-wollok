@@ -1,7 +1,38 @@
+import bordes.*
+import configuracion.*
+import plantas.*
+import zombies.*
+import wollok.game.*
 
-test "testX" {
+describe "juego"{
+	
+	var zombie
+	
+	method initialize(){
+	game.clear()
+	configuracion.pantallaInicio()
+	configuracion.configuracionInicio()
+	borde.colocar()
+	
+	zombie = new OtroZombi(position=game.center())
+	game.addVisual(zombie)
+	zombie.comenzarAMoverse()
+	}
 
-	assert.that(true)
+// cómo actúan plantas (spawn de proyectiles, que interactuen bien con zombie etc)
+// disparos
 
-}//test hacer danio	
+test "1. La cortadora atropella al zombie"{
+	cortadoras.head().hacerDanio(zombie)
+	assert.notThat(game.hasVisual(zombie))
+}
+
+
+} 
+
+
+
+
+
+//test hacer danio	
 //movimiento del zombi

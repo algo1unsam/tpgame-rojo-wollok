@@ -46,6 +46,9 @@ object selector{
 }
 object cartera {
 	var dinero = 50
+	const property position = game.at(13,4)
+	var property textColor = "000000"
+	method text() = "Dinero: " + dinero.toString()
 	
 	method recibirDinero(equis){
 		dinero+=equis
@@ -75,8 +78,7 @@ class Planta {
 	method disparar()
 	method hacerDanio(unZombi){ //proyectil es self
 				game.removeVisual(self)
-	}
-	
+	}	
 }
  
 class LanzaGuisantes inherits Planta{
@@ -108,12 +110,14 @@ class PlantaEscudo inherits Planta{
 	override method disparar()=null
 	
 	override method hacerDanio(unZombi){
-		game.removeTickEvent("avanza"+unZombi.identity())
+		unZombi.detener()
 		game.schedule(5000, {=> unZombi.comenzarAMoverse()})
 		super(unZombi)
 	}
 	
 }
+
+// traer lógica de disparo a la clase misma? (.disparar())
 
 class Disparo {
 	const property velocidad=40
@@ -137,23 +141,27 @@ class Disparo {
 	}
 	
 	method hacerDanio(unZombie){
-		if (unZombie.vida()>1) { 
-			unZombie.golpear()
-			self.meMuero()
-		} else {game.removeVisual(unZombie)
-			 	self.meMuero()}
+		unZombie.herir()
+		self.meMuero()			 	
 	}
-	
+
 	}
 	class Cortadora{
 		
 		var image = "cortadora.png"
 		var property position=0
+		var apagada = true
 		method image() = image
+		
 		method hacerDanio(unZombie){ 
-			game.onTick(200, "atropella"+self.identity(), { self.move(self.position().right(1)) })
+			// usar if para evitar repetir el onTick
+			if(apagada){
+			game.onTick(200, "atropella"+self.identity(), { self.move(self.position().right(1))})
+			apagada = false
+			}
 			unZombie.meMuero()
-		}
+			}
+			
 		method meMuero(){
 			game.removeVisual(self)
 			game.removeTickEvent("atropella"+self.identity())
@@ -167,30 +175,21 @@ class Disparo {
 		}
 		}
 		
-class Sonidos {
-	method play()
-}
-
-object sonidoCortadoraPasto inherits Sonidos{
-	override method play(){
-		return game.sound("cortadoraPasto.mp3").play()
-	}
-}
-object sonidoDisparo inherits Sonidos{
-	override method play(){
-		return game.sound("disparos.mp3").play()
-	}
-}
-object sonidoOcupado inherits Sonidos{
-	override method play(){
-		return game.sound("ocupado.mp3").play()
+class Sonido {
+	var archivo
+	method play(){ game.sound(archivo).play()
 	}
 }
 
-	const cortadora0 = new Cortadora (position = game.at(2, 0))
-	const cortadora1 = new Cortadora (position = game.at(2, 1))
-	const cortadora2 = new Cortadora (position = game.at(2, 2))
-	const cortadora3 = new Cortadora (position = game.at(2, 3))
-	const cortadora4 = new Cortadora (position = game.at(2, 4))
+const sonidoCortadoraPasto = new Sonido(archivo="cortadoraPasto.mp3")
+const sonidoDisparo = new Sonido(archivo="disparos.mp3")
+const sonidoOcupado = new Sonido(archivo="ocupado.mp3")
 
+const cortadoras = [
+	new Cortadora (position = game.at(2, 0)),
+	new Cortadora (position = game.at(2, 1)),
+	new Cortadora (position = game.at(2, 2)),
+	new Cortadora (position = game.at(2, 3)),
+	new Cortadora (position = game.at(2, 4))
+	]
 	

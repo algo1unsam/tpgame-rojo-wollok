@@ -8,7 +8,7 @@ object inicializadorZombie {
 	var y = 0
 
 	method agregarZombie() {
-		const unZombie = new OtroZombi(position = game.at(14, x.randomUpTo(4)))
+		const unZombie = new OtroZombi(position = game.at(14, x.randomUpTo(4)), velocidad = 2000.randomUpTo(5000))
 		game.addVisual(unZombie)
 		game.onCollideDo(unZombie, { proyectil => proyectil.hacerDanio(unZombie)})
 		unZombie.comenzarAMoverse()
@@ -38,9 +38,20 @@ class OtroZombi {
 		vida -= 50
 	}
 
+	method herir(){
+		if (self.vida()>1) { 
+		self.golpear()
+		} else {self.meMuero()
+			 	}
+	}
+	
+	method detener(){
+		game.removeTickEvent("avanza"+self.identity())
+	}
+	
 	method avanzarIzquierda(nuevaPosicion) {
 		var y = nuevaPosicion.y()
-		if (nuevaPosicion == game.at(-1, y)) self.position(game.at(16, y)) else self.position(nuevaPosicion)
+		self.position(nuevaPosicion)
 		if (position.x() <= 1) {
 			terminar.cerrar()}
 	}
@@ -49,7 +60,7 @@ class OtroZombi {
 	
 	method meMuero(){
 		game.removeVisual(self)
-		game.removeTickEvent("avanza"+self.identity())
+		self.detener()
 	}
 	
  
