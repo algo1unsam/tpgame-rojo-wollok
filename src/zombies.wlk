@@ -18,6 +18,8 @@ object inicializadorZombie {
 
 class OtroZombi {
 	
+	const zombieImg = ["otrozombi.png", "zombi4.png", "zombi5.png", "zombi6.png", "zombi7.png", "zombicumple.png", "zomby.png"]	
+	const property image = zombieImg.anyOne()
 	const velocidad = 4000
 	var property vida = 100
 	var property position = 0
@@ -28,9 +30,6 @@ class OtroZombi {
 			game.onTick(velocidad, "avanza"+self.identity(), { self.avanzarIzquierda(position.left(1))})
 			movimiento = true
 		}		
-	}
-	method image() {
-		return "zomby.png"
 	}
 
 	method vida() {
