@@ -1,6 +1,7 @@
 import wollok.game.*
 import plantas.*
 import zombies.*
+import bordes.*
 
 	const musicaDeFondo = game.sound("musicaJuego.mp3")
     const musicaInicio = game.sound("musicaInicio.mp3")
@@ -27,6 +28,7 @@ object configuracion {
 	game.removeVisual(principio)
 	game.addVisual(cartera)
 	game.addVisualCharacter(selector)
+	borde.colocar()
 	game.schedule(50, {musicaInicio.stop()})
 	musicaDeFondo.shouldLoop(true)
 	game.schedule(50, {musicaDeFondo.play()})

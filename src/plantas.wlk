@@ -23,7 +23,7 @@ object selector{
 		espacioOcupado = self.algoPlantado()
 		if(planta.precio()<=cartera.total()){
 			game.addVisual(planta)
-			planta.disparar()
+			planta.hagoMiTrabajo()
 			cartera.restarDinero(planta.precio())		
 		}
 	}
@@ -62,10 +62,11 @@ object cartera {
 	
 }
 
-class Planta {
+class Planta {	
 	var property vida=100
 	const property position
 	const property precio = 50
+	method velocidad() = 0
 	
 	method nuevoDisparo(posicion){
 		const temp = new Disparo(position = posicion)
@@ -74,32 +75,35 @@ class Planta {
 		temp.moverse()
 	}
 	
+	method comienzo()
+	method termino(){game.removeTickEvent("Trabajo"+self.identity())}
 	method image()
-	method disparar()
+	method hagoMiTrabajo() = game.onTick(self.velocidad(), "Trabajo"+self.identity(), { => self.comienzo()})
 	method hacerDanio(unZombi){ //proyectil es self
 				game.removeVisual(self)
 	}	
 }
  
 class LanzaGuisantes inherits Planta{
+	override method velocidad() = 7500
 	override method precio()=100
 	override method image() {return "image-asset.png"}
-	override method disparar() = game.onTick(7500, "Disparar"+self.identity(), { => self.nuevoDisparo((self.position()).right(1))})
+	override method comienzo(){self.nuevoDisparo((self.position()).right(1))}
 	override method hacerDanio(unZombi){
 		super(unZombi)
-		game.removeTickEvent("Disparar"+self.identity())
+		self.termino()
 	}
 	
 	//pasar el ontick a clase planta, y dejar lo otro aca abajo
 	
 }
 class PlantaGirasol inherits Planta{ 
-	
+	override method velocidad() = 5000
 	override method image() {return "girasol.png"}
-	override method disparar() = game.onTick(5000,"Moneda"+self.identity(),{=>cartera.recibirDinero(25) })
+	override method comienzo(){cartera.recibirDinero(25)}
 	override method hacerDanio(unZombi){
 		super(unZombi)
-		game.removeTickEvent("Moneda"+self.identity())
+		self.termino()
 	}
 	
 }
@@ -107,7 +111,7 @@ class PlantaEscudo inherits Planta{
 	
 	override method image() = return "platazana.png"
 	override method vida()=250
-	override method disparar()=null
+	override method comienzo()=null
 	
 	override method hacerDanio(unZombi){
 		unZombi.detener()

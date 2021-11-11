@@ -10,9 +10,8 @@ program juego {
 	game.height(5)
 	game.width(15)
 	configuracion.pantallaInicio()
-	borde.colocar()
 	game.start()
 	
 	}
 
-// cuando un zombi se come una planta que dispara, el disparo sigue apareciendo
+

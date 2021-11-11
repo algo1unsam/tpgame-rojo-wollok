@@ -17,14 +17,17 @@ object inicializadorZombie {
 }
 
 class OtroZombi {
-
+	
 	const velocidad = 4000
 	var property vida = 100
 	var property position = 0
-	
+	var movimiento = false
 	
 	method comenzarAMoverse(){
-		game.onTick(velocidad, "avanza"+self.identity(), { self.avanzarIzquierda(position.left(1))})
+		if(game.hasVisual(self)){ // El if corrobora que el zombie tenga visual para evitar reiniciar su onTick cuando muere estando quieto
+			game.onTick(velocidad, "avanza"+self.identity(), { self.avanzarIzquierda(position.left(1))})
+			movimiento = true
+		}		
 	}
 	method image() {
 		return "zomby.png"
@@ -46,8 +49,11 @@ class OtroZombi {
 	}
 	
 	method detener(){
-		game.removeTickEvent("avanza"+self.identity())
+		if(movimiento){game.removeTickEvent("avanza"+self.identity())
+			movimiento = false
+		}
 	}
+
 	
 	method avanzarIzquierda(nuevaPosicion) {
 		var y = nuevaPosicion.y()
@@ -55,7 +61,9 @@ class OtroZombi {
 		if (position.x() <= 1) {
 			terminar.cerrar()}
 	}
-
+	
+	
+	
 	method hacerDanio(unZombi, proyectil) = 0
 	
 	method meMuero(){
